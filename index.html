@@ -1,1 +1,107 @@
+<!DOCTYPE HTML5>
+	
+	<html lang="en">
+	<head>
+	<meta charset="utf-8">
+	
+	<title>Web App</title>
+	<style>
+	.header {
+	padding: 60px;
+	text-align: center;
+	background: #1a2cbc;
+	color: white;
+	font-size: 30px;
+	}
+	
+	#myCanvas {
+	width: auto;
+	border: 1px solid black;
+	}
+	</style>
+	</head>
+	
+	<body>
+	<div class="header">
+	<h1>Make your shape</h1>
+	<p>Enter Shape, color to see it appear on the canvas</p>
+	<p>e.g. triangle, red</p>
+	</div>
+	
+	<textarea id="myTextArea" rows="4" cols="50">
+	</textarea>
+	
+	<button type="button" onclick="getValues()">Try it !!!
+	</button>
+	
+	<br>
+	
+	<canvas id="myCanvas">
+	</canvas>
+	
+	<script type="text/javascript">
+	function getValues() {
+	var x = document.getElementById("myTextArea").value.trim();
+	var res = x.split(","); 
+	clearCanvas(); 
+	drawShapes(res[0].toLowerCase().trim(), res[1].trim());
+	}
+	
+	function clearCanvas() {
+	var canvas = document.getElementById("myCanvas"); 
+	const context = canvas.getContext('2d'); 
+	context.clearRect(0, 0, canvas.width, canvas.height);
+	}
+	
+	function drawShapes(shape, color) {
+	switch (shape) {
+	case "triangle":
+	drawTriangle(color); 
+	break;
+	case "rectangle":
+	drawRectangle(color); 
+	break;
+	case "circle":
+	drawCircle(color); 
+	break;
+	default:
+	shape = "None";
+	break;
+	}
+	}
+	
+	function drawTriangle(color) {
+	var canvas = document.getElementById("myCanvas");
+	var context = canvas.getContext("2d");
+	context.beginPath();
+	context.moveTo(10, 10); 
+	context.lineTo(10, 80); 
+	context.lineTo(80, 80); 
+	context.closePath();
+	context.lineWidth = 10;
+	context.strokeStyle = '#666666';
+	context.stroke();
+	context.fillStyle = `${color}`; 
+	context.fill(); 
+	}
+	
+	function drawRectangle(color) {
+	var canvas = document.getElementById("myCanvas");
+	var context = canvas.getContext("2d");
+	context.fillStyle = `${color}`; 
+	context.fillRect(5, 5, 80, 100); 
+	}
+	
+	function drawCircle(color) {
+	var c = document.getElementById("myCanvas");
+	var ctx = c.getContext("2d");
+	ctx.beginPath();
+	ctx.arc(100, 75, 50, 0, 2 * Math.PI);
+	ctx.fillStyle = `${color}`;
+	ctx.fill(); 
+	}
+	</script>
+	
+	</body>
+	</html>
 
